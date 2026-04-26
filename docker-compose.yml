@@ -7,9 +7,9 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      GEE_SERVICE_ACCOUNT_KEY_PATH: /run/secrets/gee-sa.json
+      GEE_SERVICE_ACCOUNT_KEY_PATH: /run/secrets/gee/projectomela-4bdcddddbfa2.json
     volumes:
-      - ./secrets/gee/gee-sa.json:/run/secrets/gee-sa.json:ro
+      - ./secrets/gee/projectomela-4bdcddddbfa2.json:/run/secrets/gee/projectomela-4bdcddddbfa2.json:ro
 
   frontend:
     image: nginx:1.27-alpine
