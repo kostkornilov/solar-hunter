@@ -1,2 +1,2 @@
-window.SOLARHUNTER_API_BASE_URL = "http://localhost:8000";
+window.SOLARHUNTER_API_BASE_URL = "https://bbaf9fc4ichk5kre5frl.containers.yandexcloud.net";
 
