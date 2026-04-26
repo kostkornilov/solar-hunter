@@ -8,6 +8,7 @@ const tariffSlider = document.getElementById("tariffSlider");
 const tariffInput = document.getElementById("tariffInput");
 const evaluateBtn = document.getElementById("evaluateBtn");
 const statusText = document.getElementById("statusText");
+const cfFormulaText = document.getElementById("cfFormulaText");
 const resultCard = document.getElementById("resultCard");
 
 const map = L.map("map").setView([55.75, 37.62], 4);
@@ -96,10 +97,12 @@ evaluateBtn.addEventListener("click", async () => {
 
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
     statusText.textContent = "Сначала укажите корректные координаты.";
+    cfFormulaText.textContent = "";
     return;
   }
 
   statusText.textContent = "Собираем данные и считаем прогноз. Это может занять время...";
+  cfFormulaText.textContent = "";
   evaluateBtn.disabled = true;
 
   try {
@@ -113,12 +116,14 @@ evaluateBtn.addEventListener("click", async () => {
     }
     const data = await response.json();
     const tableHtml = renderResult(data);
-    statusText.textContent = `Готово. request_id: ${data.request_id}`;
+    statusText.textContent = "Готово";
+    cfFormulaText.textContent = "CF=E_real/(P*T), где E_real -- реальная выработка станции, P -- установленная мощность станции, T = 8760 -- кол-во часов в году.";
     if (marker) {
       marker.bindPopup(`<div style="min-width:280px">${tableHtml}</div>`).openPopup();
     }
   } catch (error) {
     statusText.textContent = `Ошибка расчета: ${String(error)}`;
+    cfFormulaText.textContent = "";
   } finally {
     evaluateBtn.disabled = false;
   }

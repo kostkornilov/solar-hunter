@@ -93,3 +93,11 @@ button {
   color: #93c5fd;
 }
 
+#cfFormulaText {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
