@@ -502,6 +502,8 @@ def fetch_process_xarray(geojson: dict, clean_nan: bool = True, nan_method: str 
             logging.error(f"Ошибка при формировании xarray.Dataset: {e}")
             return xr.Dataset()
 
+    logging.info("ERA5 source selected: %s", ds.attrs.get("cds_source", "unknown"))
+
     # Обработка NaN значений
     if clean_nan and ds.data_vars:
         logging.info(f"Применение метода очистки NaN: {nan_method}")
