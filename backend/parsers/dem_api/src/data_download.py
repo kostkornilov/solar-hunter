@@ -235,30 +235,28 @@ def _export_raster_tiled(
 
 
 def initialize_gee(project: str):
-    """Инициализация GEE: Service Account (key file) или локальный fallback."""
+    """Инициализация GEE только через Service Account key file (без fallback)."""
     service_account_email = os.getenv("GEE_SERVICE_ACCOUNT_EMAIL", "").strip()
     service_account_key_path = os.getenv("GEE_SERVICE_ACCOUNT_KEY_PATH", "").strip()
 
-    try:
-        if service_account_email and service_account_key_path:
-            key_path = os.path.abspath(os.path.expanduser(os.path.expandvars(service_account_key_path)))
-            if not os.path.isfile(key_path):
-                raise FileNotFoundError(
-                    f"GEE_SERVICE_ACCOUNT_KEY_PATH не найден: {key_path}"
-                )
-            credentials = ee.ServiceAccountCredentials(service_account_email, key_path)
-            ee.Initialize(credentials=credentials, project=project)
-            print("Google Earth Engine успешно инициализирован (Service Account key file).")
-            return
-
-        ee.Initialize(project=project)
-        print("Google Earth Engine успешно инициализирован (локальные credentials).")
-    except Exception as e:  # noqa: BLE001
-        print(f"Ошибка инициализации: {e}")
-        print(
-            "Проверьте GEE_SERVICE_ACCOUNT_EMAIL/GEE_SERVICE_ACCOUNT_KEY_PATH "
-            "или выполните 'earthengine authenticate'."
+    if not service_account_email or not service_account_key_path:
+        raise RuntimeError(
+            "Требуется Service Account авторизация: задайте "
+            "GEE_SERVICE_ACCOUNT_EMAIL и GEE_SERVICE_ACCOUNT_KEY_PATH."
         )
+
+    key_path = os.path.abspath(
+        os.path.expanduser(os.path.expandvars(service_account_key_path))
+    )
+    if not os.path.isfile(key_path):
+        raise RuntimeError(f"GEE key file не найден: {key_path}")
+
+    try:
+        credentials = ee.ServiceAccountCredentials(service_account_email, key_path)
+        ee.Initialize(credentials=credentials, project=project)
+        print("Google Earth Engine успешно инициализирован (Service Account key file).")
+    except Exception as e:  # noqa: BLE001
+        raise RuntimeError(f"Ошибка инициализации GEE через Service Account: {e}") from e
 
 
 def _point_lon_lat_from_geojson(lon_or_lat, lat_or_lon):
