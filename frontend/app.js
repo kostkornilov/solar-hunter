@@ -97,12 +97,12 @@ evaluateBtn.addEventListener("click", async () => {
 
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
     statusText.textContent = "Сначала укажите корректные координаты.";
-    cfFormulaText.textContent = "";
+    cfFormulaText.innerHTML = "";
     return;
   }
 
   statusText.textContent = "Собираем данные и считаем прогноз. Это может занять время...";
-  cfFormulaText.textContent = "";
+  cfFormulaText.innerHTML = "";
   evaluateBtn.disabled = true;
 
   try {
@@ -117,13 +117,18 @@ evaluateBtn.addEventListener("click", async () => {
     const data = await response.json();
     const tableHtml = renderResult(data);
     statusText.textContent = "Готово";
-    cfFormulaText.textContent = "CF=E_real/(P*T), где E_real -- реальная выработка станции, P -- установленная мощность станции, T = 8760 -- кол-во часов в году.";
+    cfFormulaText.innerHTML =
+      "CF = E_real / (P * T), где E_real - реальная выработка станции, P - установленная мощность станции, T = 8760 ч/год.<br>" +
+      "CAPEX = 75000 * P (руб).<br>" +
+      "OPEX_year = 1000 * P (руб/год).<br>" +
+      "REVENUE_year = CF * 8760 * P * tariff (руб/год).<br>" +
+      "Payback_years = CAPEX / (REVENUE_year - OPEX_year), если REVENUE_year > OPEX_year; иначе проект не окупается.";
     if (marker) {
       marker.bindPopup(`<div style="min-width:280px">${tableHtml}</div>`).openPopup();
     }
   } catch (error) {
     statusText.textContent = `Ошибка расчета: ${String(error)}`;
-    cfFormulaText.textContent = "";
+    cfFormulaText.innerHTML = "";
   } finally {
     evaluateBtn.disabled = false;
   }
