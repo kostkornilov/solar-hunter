@@ -1,0 +1,11 @@
+dem_api.egg-info
+examples/example_output/*
+**/.vscode/
+example_output/*
+examples/classification_examples/*
+examples/classification_output/*
+examples/classification_output_denoised/*
+filter_evaluation/filter_evaluation_output/*
+tests/test_output/*
+TODO.md
+.cursorrules

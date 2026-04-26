@@ -1,0 +1,2 @@
+"""SolarHunter backend package."""
+

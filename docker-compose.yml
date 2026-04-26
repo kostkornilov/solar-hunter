@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      CDS_API_KEY: ${CDS_API_KEY:-}
+      EARTHDATA_TOKEN: ${EARTHDATA_TOKEN:-}
+      GEE_PROJECT: ${GEE_PROJECT:-projectomela}
+      MODEL_ARTIFACTS_DIR: ${MODEL_ARTIFACTS_DIR:-/app/model_serving}
+
+  frontend:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - backend

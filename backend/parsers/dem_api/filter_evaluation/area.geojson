@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type":"Polygon","coordinates":[[[131.16354,42.909795],[131.105461,42.909795],[131.105461,42.951732],[131.16354,42.951732],[131.16354,42.909795]]]},
+      "properties": {
+        "time": null,
+        "is_rectangle": true
+      }
+    }
+  ]
+}

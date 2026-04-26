@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarHunter</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="controls">
+      <h1>SolarHunter</h1>
+      <label>
+        Широта
+        <input id="latInput" type="number" step="0.000001" min="-90" max="90" />
+      </label>
+      <label>
+        Долгота
+        <input id="lonInput" type="number" step="0.000001" min="-180" max="180" />
+      </label>
+
+      <label>
+        Мощность станции P (кВт)
+        <div class="sliderRow">
+          <input id="powerSlider" type="range" min="0.1" max="586" step="0.1" value="100" />
+          <input id="powerInput" type="number" min="0.1" max="586" step="0.1" value="100" />
+        </div>
+      </label>
+
+      <label>
+        Тариф (руб/кВт*ч)
+        <div class="sliderRow">
+          <input id="tariffSlider" type="range" min="0.1" max="30" step="0.1" value="8.5" />
+          <input id="tariffInput" type="number" min="0.1" max="30" step="0.1" value="8.5" />
+        </div>
+      </label>
+
+      <button id="evaluateBtn">Оценить потенциал территории</button>
+      <p id="statusText">Выберите точку на карте или задайте координаты вручную.</p>
+    </section>
+
+    <section class="mapPanel">
+      <div id="map"></div>
+      <div id="resultCard" class="result hidden"></div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+backend/.ruff_cache/
+backend/.mypy_cache/
+backend/.pytest_cache/
+frontend/.DS_Store
+dist/
+build/
+*.log
+.cursorrules
+.github/copilot-instructions.md
