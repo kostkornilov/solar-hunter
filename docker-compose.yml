@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - ./backend/.env
+      - ./backend/.env.docker
     environment:
       GEE_SERVICE_ACCOUNT_KEY_PATH: /run/secrets/gee/projectomela-4bdcddddbfa2.json
     volumes:
