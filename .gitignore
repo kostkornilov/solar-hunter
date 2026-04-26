@@ -14,3 +14,4 @@ build/
 *.log
 .cursorrules
 .github/copilot-instructions.md
+secrets/gee/*.json

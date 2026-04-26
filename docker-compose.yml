@@ -4,11 +4,12 @@ services:
       context: ./backend
     ports:
       - "8000:8000"
+    env_file:
+      - ./backend/.env
     environment:
-      CDS_API_KEY: ${CDS_API_KEY:-}
-      EARTHDATA_TOKEN: ${EARTHDATA_TOKEN:-}
-      GEE_PROJECT: ${GEE_PROJECT:-projectomela}
-      MODEL_ARTIFACTS_DIR: ${MODEL_ARTIFACTS_DIR:-/app/model_serving}
+      GEE_SERVICE_ACCOUNT_KEY_PATH: /run/secrets/gee-sa.json
+    volumes:
+      - ./secrets/gee/gee-sa.json:/run/secrets/gee-sa.json:ro
 
   frontend:
     image: nginx:1.27-alpine

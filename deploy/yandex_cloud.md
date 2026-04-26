@@ -9,6 +9,9 @@
    - `CDS_API_KEY`
    - `EARTHDATA_TOKEN`
    - `GEE_PROJECT`
+   - `GEE_SERVICE_ACCOUNT_EMAIL`
+   - `GEE_SERVICE_ACCOUNT_KEY_JSON` (содержимое service-account JSON как строка из секрета Lockbox)
+   - `GEE_SERVICE_ACCOUNT_KEY_PATH=/tmp/secrets/gee-sa.json`
    - `MODEL_ARTIFACTS_DIR` (или заранее положите артефакты в образ)
 4. Откройте endpoint через API Gateway.
 
