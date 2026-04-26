@@ -227,7 +227,7 @@ def fetch_process_xarray(geojson: dict, clean_nan: bool = True, nan_method: str 
     )
 
     try:
-        client = cdsapi.Client(url=CDS_API_URL, key=CDS_API_KEY)
+        client = cdsapi.Client(url=CDS_API_URL, key=CDS_API_KEY, sleep_max=60)
     except Exception as e:
         raise Exception(f"Ошибка при инициализации CDS API клиента: {e}")
 
