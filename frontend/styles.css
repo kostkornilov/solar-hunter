@@ -101,3 +101,31 @@ button {
   font-style: italic;
 }
 
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .controls {
+    border-right: none;
+    border-bottom: 1px solid #1e293b;
+    padding: 16px;
+  }
+
+  .sliderRow {
+    grid-template-columns: 1fr 90px;
+  }
+
+  #map {
+    height: 60vh;
+    min-height: 360px;
+  }
+
+  .result {
+    position: static;
+    margin: 12px;
+    min-width: 0;
+  }
+}
+
